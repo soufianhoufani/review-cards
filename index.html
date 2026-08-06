@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="sv">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Aktivera review-kort</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  </head>
+  <body>
+    <main class="shell">
+      <section class="panel">
+        <div class="brand-row">
+          <div class="mark">G</div>
+          <div>
+            <p class="eyebrow">Google review card</p>
+            <h1 id="pageTitle">Aktivera ditt kort</h1>
+          </div>
+        </div>
+
+        <div id="loadingState" class="state">
+          <div class="spinner" aria-hidden="true"></div>
+          <p>Kontrollerar kortet...</p>
+        </div>
+
+        <div id="missingState" class="state hidden">
+          <h2>QR-koden saknar kort-ID</h2>
+          <p>Skanna QR-koden på kortet igen. Länken ska innehålla <strong>?card=</strong> följt av kortets kod.</p>
+        </div>
+
+        <div id="notFoundState" class="state hidden">
+          <h2>Kortet finns inte</h2>
+          <p>Kontrollera att QR-koden är rätt skapad eller kontakta säljaren.</p>
+        </div>
+
+        <form id="activationForm" class="hidden">
+          <p class="intro">Klistra in länken dit kunder ska skickas när de skannar QR-koden. Det brukar vara företagets Google-recensionslänk.</p>
+
+          <label>
+            Företagsnamn
+            <input id="businessName" name="businessName" autocomplete="organization" placeholder="Exempel: Solna Bilservice" />
+          </label>
+
+          <label>
+            Google review-länk
+            <input id="targetUrl" name="targetUrl" type="url" autocomplete="url" placeholder="https://g.page/r/..." required />
+          </label>
+
+          <button id="submitButton" type="submit">Aktivera kort</button>
+          <p id="formMessage" class="message" role="status"></p>
+        </form>
+
+        <div id="activatedState" class="state hidden">
+          <div class="success" aria-hidden="true">✓</div>
+          <h2>Kortet är aktiverat</h2>
+          <p>Du skickas vidare nu.</p>
+          <a id="manualLink" class="secondary-link" href="#">Öppna länken manuellt</a>
+        </div>
+      </section>
+
+      <p class="footer">Behöver du ändra länken senare? Kontakta säljaren.</p>
+    </main>
+
+    <script src="config.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>
