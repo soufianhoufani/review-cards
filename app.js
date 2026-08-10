@@ -11,6 +11,7 @@
     notFound: document.getElementById("notFoundState"),
     form: document.getElementById("activationForm"),
     activated: document.getElementById("activatedState"),
+    pageTitle: document.getElementById("pageTitle"),
     button: document.getElementById("submitButton"),
     message: document.getElementById("formMessage"),
     targetUrl: document.getElementById("targetUrl"),
@@ -19,6 +20,18 @@
   };
 
   function show(name) {
+    const titles = {
+      loading: "Oppnar...",
+      missing: "Aktivera ditt kort",
+      notFound: "Kortet hittades inte",
+      form: "Aktivera ditt kort",
+      activated: "Kortet ar aktiverat"
+    };
+
+    if (elements.pageTitle && titles[name]) {
+      elements.pageTitle.textContent = titles[name];
+    }
+
     ["loading", "missing", "notFound", "form", "activated"].forEach((key) => {
       elements[key].classList.toggle("hidden", key !== name);
     });
@@ -31,7 +44,12 @@
     return new URL(withProtocol).href;
   }
 
-  function redirectTo(url) {
+  function redirectTo(url, immediate = false) {
+    if (immediate) {
+      window.location.replace(url);
+      return;
+    }
+
     elements.manualLink.href = url;
     show("activated");
     window.setTimeout(() => {
@@ -72,7 +90,7 @@
     }
 
     if (card.status === "active" && card.destination_url) {
-      redirectTo(card.destination_url);
+      redirectTo(card.destination_url, true);
       return;
     }
 
