@@ -4,23 +4,32 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Aktivera review-kort</title>
+    <style>
+      body.booting {
+        background: #fff;
+      }
+
+      body.booting .shell {
+        display: none;
+      }
+    </style>
     <link rel="stylesheet" href="styles.css" />
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   </head>
-  <body>
+  <body class="booting">
     <main class="shell">
       <section class="panel">
         <div class="brand-row">
           <div class="mark">G</div>
           <div>
             <p class="eyebrow">Google review card</p>
-            <h1 id="pageTitle" class="hidden">Aktivera ditt kort</h1>
+            <h1 id="pageTitle" hidden>Aktivera ditt kort</h1>
           </div>
         </div>
 
-        <div id="loadingState" class="state quiet-loading" aria-label="Oppnar">
-          <div class="spinner hidden" aria-hidden="true"></div>
-          <p class="hidden">Kontrollerar kortet...</p>
+        <div id="loadingState" class="state quiet-loading">
+          <div class="spinner" aria-hidden="true" hidden></div>
+          <p hidden>Kontrollerar kortet...</p>
         </div>
 
         <div id="missingState" class="state hidden">

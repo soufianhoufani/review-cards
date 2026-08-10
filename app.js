@@ -20,6 +20,8 @@
   };
 
   function show(name) {
+    document.body.classList.toggle("booting", name === "loading");
+
     const titles = {
       loading: "",
       missing: "Aktivera ditt kort",
@@ -30,7 +32,7 @@
 
     if (elements.pageTitle) {
       elements.pageTitle.textContent = titles[name] || "";
-      elements.pageTitle.classList.toggle("hidden", name === "loading");
+      elements.pageTitle.hidden = name === "loading";
     }
 
     ["loading", "missing", "notFound", "form", "activated"].forEach((key) => {
