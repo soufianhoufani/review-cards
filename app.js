@@ -21,15 +21,16 @@
 
   function show(name) {
     const titles = {
-      loading: "Oppnar...",
+      loading: "",
       missing: "Aktivera ditt kort",
       notFound: "Kortet hittades inte",
       form: "Aktivera ditt kort",
       activated: "Kortet ar aktiverat"
     };
 
-    if (elements.pageTitle && titles[name]) {
-      elements.pageTitle.textContent = titles[name];
+    if (elements.pageTitle) {
+      elements.pageTitle.textContent = titles[name] || "";
+      elements.pageTitle.classList.toggle("hidden", name === "loading");
     }
 
     ["loading", "missing", "notFound", "form", "activated"].forEach((key) => {
